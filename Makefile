@@ -1,7 +1,7 @@
 
 SHELL:=/bin/bash
 
-AZURETRE_HOME?="AzureTRE"
+AZURETRE_HOME?=C:/Users/Yoshi/Projects/UZBrussel/AzureTRE
 
 # This must come before the include statement
 # Otherwise, $(lastword) will be the last included file
@@ -15,6 +15,11 @@ include $(AZURETRE_HOME)/Makefile
 # This is a sample make command to build user resource templates that are in this repo, versus the AzureTRE core repo
 # Any "make bundle" command from the AzureTRE core repo can be pasted here by modifying the command name
 #   and modifying MAKEFILE_DIR to THIS_MAKEFILE_DIR
+test:
+	@echo $(MAKEFILE_LIST)
+	@echo  $(lastword $(MAKEFILE_LIST))
+	@echo $(abspath $(lastword $(MAKEFILE_LIST)))
+
 user_resource_bundle_sample:
 	$(MAKE) bundle-build bundle-publish bundle-register \
 	DIR="${THIS_MAKEFILE_DIR}templates/workspace_services/${WORKSPACE_SERVICE}/user_resources/${BUNDLE}" BUNDLE_TYPE=user_resource WORKSPACE_SERVICE_NAME=tre-service-${WORKSPACE_SERVICE}
